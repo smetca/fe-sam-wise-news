@@ -4,8 +4,8 @@ import styles from './CreateArticleAndTopic.module.css'
 const CreateArticleAndTopic = () => {
   return (
     <section className={styles.create}>
+      <h2>Create Article</h2>
       <button>Create Article</button>
-      <button>Create Topic</button>
     </section>
   );
 }

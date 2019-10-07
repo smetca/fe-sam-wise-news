@@ -1,5 +1,14 @@
 .create {
   grid-area: create;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
+}
+
+.create h2 {
+  text-align: center;
+}
+
+.create button {
+  padding: 1rem;
 }

@@ -5,3 +5,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.showcase button {
+  width: 100%;
+  padding: 1rem;
+}

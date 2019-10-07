@@ -1,9 +1,16 @@
 import React from 'react';
+import Header from './components/Header'
+import Nav from './components/Nav';
 import './App.css';
+import Viewport from './components/Viewport';
 
 function App() {
   return (
-    <p>Removed Create-React-App Defaults</p>
+    <main className='app'>
+      <Header />
+      <Nav />
+      <Viewport />
+    </main>
   );
 }
 

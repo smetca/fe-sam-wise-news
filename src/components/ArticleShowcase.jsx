@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './ArticleShowcase.module.css';
+import styles from '../styles/ArticleShowcase.module.css';
 
 class ArticleShowcase extends Component {
   state = {
@@ -31,15 +31,15 @@ class ArticleShowcase extends Component {
                 .split('\n')
                 .map((paragraph, index, array) => {
                   if(index < array.length - 1) {
-                    return <p>{paragraph}</p>
+                    return <p key={index}>{paragraph}</p>
                   } else {
-                    return <p>{paragraph}...</p>
+                    return <p key={index}>{paragraph}...</p>
                   }
                 })
               : article.body
                   .split('\n')
-                  .map(paragraph => {
-                    return <p>{paragraph}</p>
+                  .map((paragraph, index) => {
+                    return <p key={index}>{paragraph}</p>
                   })
           }
         </article>

@@ -1,0 +1,30 @@
+.list {
+  grid-area: list;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.article {
+  display: grid;
+  grid-template-areas:
+    'heading heading heading'
+    'voter . comments'
+}
+
+.article h3 {
+  grid-area: heading;
+}
+
+.voter {
+  display: flex;
+  width: 100%;
+  grid-area: voter;
+}
+
+.comments {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  grid-area: comments;
+}

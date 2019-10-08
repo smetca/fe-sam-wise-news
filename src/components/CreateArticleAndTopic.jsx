@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CreateArticleAndTopic.module.css'
+import styles from '../styles/CreateArticleAndTopic.module.css'
 
 const CreateArticleAndTopic = () => {
   return (

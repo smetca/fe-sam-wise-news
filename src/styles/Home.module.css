@@ -1,8 +1,6 @@
-.viewport {
+.home {
   display: grid;
   grid-template-areas:
     'showcase'
     'create';
-  grid-column: span 2;
-  grid-row: 2;
 }

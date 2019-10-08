@@ -3,7 +3,7 @@ import styles from '../styles/Nav.module.css'
 import {Link} from '@reach/router';
 
 class Nav extends Component {
-  
+
   state = {
     isNav: false
   }

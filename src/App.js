@@ -5,6 +5,7 @@ import './App.css';
 import {Router} from '@reach/router'
 import Home from './containers/Home'
 import Articles from './containers/Articles';
+import SingleArticle from './containers/SingleArticle';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Router primary={false} className='viewport'>
         <Home path='/'/>
         <Articles path='/articles'/>
+        <SingleArticle path='/articles/:article_id' />
       </Router>
       {/* <Viewport /> */}
     </main>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from '../styles/ArticleList.module.css';
 import * as api from '../utils/api';
+import {Link} from '@reach/router'
 
 class ArticleList extends Component {
 
@@ -40,7 +41,7 @@ class ArticleList extends Component {
           articles && articles.map(article => {
             return (
               <li className={styles.article} key={article.article_id}>
-                <h3>{article.title}</h3>
+                <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
                 <div className={styles.voter}>
                   <button value='1' name={article.article_id} onClick={this.handleVote}>Up</button>
                   <span>{article.votes}</span>

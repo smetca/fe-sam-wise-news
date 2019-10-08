@@ -9,6 +9,26 @@ class ArticleList extends Component {
     isLoading: true
   }
 
+  handleVote = (event) => {
+    event.preventDefault();
+    const changeVote = {
+      inc_votes: Number(event.target.value)
+    }
+    api.updateVote(changeVote, event.target.name)
+      .then(response => {
+        this.setState((currentState) => {
+          let {articles} = currentState;
+          const articleIndex = articles.findIndex(article => {
+            return article.article_id === response.article_id;
+          })
+          const {comment_count} = articles[articleIndex];
+          articles[articleIndex] = {...response, comment_count};
+          return {articles};
+        })
+      })
+      .catch(console.dir)
+  }
+
   render() {
     const {articles, isLoading} = this.state;
     if(isLoading) return (
@@ -22,9 +42,9 @@ class ArticleList extends Component {
               <li className={styles.article} key={article.article_id}>
                 <h3>{article.title}</h3>
                 <div className={styles.voter}>
-                  <button>Up</button>
+                  <button value='1' name={article.article_id} onClick={this.handleVote}>Up</button>
                   <span>{article.votes}</span>
-                  <button>Down</button>
+                  <button value='-1' name={article.article_id} onClick={this.handleVote}>Down</button>
                 </div>
                 <div className={styles.comments}>
                   <span>Comments: {article.comment_count}</span>

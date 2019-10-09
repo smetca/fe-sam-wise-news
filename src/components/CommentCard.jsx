@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Voter from './Voter';
+import Moment from 'react-moment';
 
 class CommentCard extends Component {
 
@@ -23,6 +24,7 @@ class CommentCard extends Component {
         <li>
           <p>{comment.body}</p>
           <span>{comment.author}</span>
+          <span>Created: <Moment date={comment.created_at} fromNow/></span>
           <Voter id={comment.comment_id} votes={comment.votes} type={'comment'}/>
           {
             username === comment.author && <button onClick={this.deleteComment}>Delete Comment</button>

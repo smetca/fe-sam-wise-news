@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from '../styles/ArticleShowcase.module.css';
+import {Link} from '@reach/router'
 
 class ArticleShowcase extends Component {
   state = {
@@ -43,9 +44,9 @@ class ArticleShowcase extends Component {
                   })
           }
         </article>
-        <button>
+        <Link to='/articles'>
           View All Articles
-        </button>
+        </Link>
       </section>
     );
   }

@@ -9,6 +9,10 @@
   text-align: center;
 }
 
-.create button {
+.create a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   padding: 1rem;
 }

@@ -2,8 +2,10 @@ import axios from 'axios';
 
 const request = axios.create({baseURL:'https://sam-wise-news.herokuapp.com/api'})
 
-export const getArticles = async () => {
-  const response = await request.get('/articles');
+export const getArticles = async (filters) => {
+  const response = await request.get('/articles', {
+    params: filters
+  });
   return response.data.articles;
 }
 

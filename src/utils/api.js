@@ -26,3 +26,10 @@ export const updateVote = async (vote, id, type) => {
     : await request.patch(`/articles/${id}`, vote);
   return response.data.article;
 }
+
+export const postComment = async (id, comment) => {
+  const response = await request.post(`/articles/${id}/comments`, {
+    ...comment
+  })
+  return response.data.comment;
+}

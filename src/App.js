@@ -10,7 +10,7 @@ import SingleArticle from './containers/SingleArticle';
 class App extends Component {
 
   state = {
-    user: 'tickle122'
+    username: 'tickle122'
   }
 
   render() {
@@ -21,7 +21,7 @@ class App extends Component {
         <Router primary={false} className='viewport'>
           <Home path='/'/>
           <Articles path='/articles'/>
-          <SingleArticle path='/articles/:article_id' />
+          <SingleArticle path='/articles/:article_id' username={this.state.username}/>
         </Router>
       </main>
     );

@@ -14,7 +14,7 @@ class Voter extends Component {
       this.setState(({voteChange}) => {
         return {voteChange: voteChange + vote}
       })
-      api.updateVote({inc_votes: vote}, event.target.name)
+      api.updateVote({inc_votes: vote}, event.target.name, this.props.type)
         .catch(err => {
           this.setState(({voteChange}) => {
             return {voteChange: voteChange - vote}

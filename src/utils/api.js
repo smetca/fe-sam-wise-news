@@ -18,7 +18,9 @@ export const getArticleComments = async (article_id) => {
   return response.data.comments;
 }
 
-export const updateVote = async (vote, article_id) => {
-  const response = await request.patch(`/articles/${article_id}`, vote);
+export const updateVote = async (vote, id, type) => {
+  const response = type === 'comment'
+    ? await request.patch(`/comments/${id}`, vote)
+    : await request.patch(`/articles/${id}`, vote);
   return response.data.article;
 }

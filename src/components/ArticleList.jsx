@@ -20,7 +20,7 @@ class ArticleList extends Component {
         {
           articles && articles.map(article => {
             return (
-              <ArticleCard article={article}/>
+              <ArticleCard article={article} key={article.article_id}/>
             )
           })
         }

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../styles/CommentList.module.css'
+import CommentCard from './CommentCard';
 
 const CommentList = ({comments}) => {
   return (
@@ -9,11 +10,7 @@ const CommentList = ({comments}) => {
         {
           comments.map(comment => {
             return (
-              <li key={comment.comment_id}>
-                <p>{comment.body}</p>
-                <span>{comment.author}</span>
-                <span>{comment.votes}</span>
-              </li>
+              <CommentCard comment={comment} key={comment.comment_id}/>
             )
           })
         }

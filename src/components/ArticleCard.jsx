@@ -9,7 +9,7 @@ class ArticleCard extends Component {
   render() {
     const {article} = this.props;
     return (
-      <li className={styles.article} key={article.article_id}>
+      <li className={styles.article}>
         <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
         <Voter id={article.article_id} votes={article.votes}/>
         <div className={styles.comments}>

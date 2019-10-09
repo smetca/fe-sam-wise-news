@@ -14,9 +14,11 @@ export const getArticle = async (article_id) => {
   return response.data.article;
 }
 
-export const getArticleComments = async (article_id) => {
-  const response = await request.get(`/articles/${article_id}/comments`)
-  console.log(response.data)
+export const getArticleComments = async (article_id, filters) => {
+  const response = await request.get(`/articles/${article_id}/comments`, {
+    params: filters
+  })
+  console.dir(response.data)
   return response.data.comments;
 }
 

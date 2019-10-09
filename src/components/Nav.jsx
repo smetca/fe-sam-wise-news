@@ -22,8 +22,8 @@ class Nav extends Component {
       <nav className={styles.nav}>
         <button onClick={this.handleNav}>NAV</button>
         <ul className={isNav ? `${styles['navlist-active']} ${styles.navlist}` : styles.navlist}>
-          <Link to='/'><li>Home</li></Link>
-          <Link to='/articles'><li>Articles</li></Link>
+          <li><Link to='/' className={styles.link}>Home</Link></li>
+         <li><Link to='/articles' className={styles.link}>Articles</Link></li>
         </ul>
       </nav>
     );

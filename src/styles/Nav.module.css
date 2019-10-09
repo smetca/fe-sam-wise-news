@@ -40,4 +40,10 @@
 
 .navlist li {
   height: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  flex-grow: 1;
 }

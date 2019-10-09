@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Voter from './Voter';
+import * as api from '../utils/api'
 import Moment from 'react-moment';
 
 class CommentCard extends Component {
@@ -10,15 +11,20 @@ class CommentCard extends Component {
 
   deleteComment = (event) => {
     event.preventDefault();
+    const {comment} = this.props;
     if(window.confirm('Do you want to delete this comment?')) {
       this.setState({deleted: true});
+      api.deleteComment(comment.comment_id)
+        .then(status => {
+
+        })
+        .catch(console.dir)
     }
   }
 
   render() {
     const {deleted} = this.state;
     const {comment, username} = this.props;
-    console.log(username);
     if(deleted) return <li>Comment deleted</li>
     return (
         <li>

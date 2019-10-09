@@ -35,3 +35,8 @@ export const postComment = async (id, comment) => {
   })
   return response.data.comment;
 }
+
+export const deleteComment = async (id) => {
+  const response = await request.delete(`/comments/${id}`);
+  return response.status;
+}

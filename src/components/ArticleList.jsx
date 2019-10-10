@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from '../styles/ArticleList.module.css';
 import * as api from '../utils/api';
 import ArticleCard from './ArticleCard';
+import ArticleFilter from './ArticleFilter';
 
 class ArticleList extends Component {
 
@@ -54,34 +55,19 @@ class ArticleList extends Component {
       <p>Loading...</p>
     )
     return (
-      <>
-        <div>
+      <section className={styles.articles}>
+        <div className={styles.filter}>
           <button onClick={this.toggleDisplayFilter}>Filters</button>
           {
             displayFilter &&
-              <form onSubmit={this.handleSubmit}>
-                <label htmlFor="sortBy">Sort By</label>
-                <select onChange={this.handleChange} name="sortBy" value={this.state.filters.sortBy}>
-                  <option value="votes">Votes</option>
-                  <option value="title">Title</option>
-                  <option value="created_at">Date</option>
-                </select>
-                <label htmlFor="topic">Topics</label>
-                <select onChange={this.handleChange} name="topic" value={this.state.filters.topic}>
-                  <option value="">All</option>
-                  <option value="coding">Coding</option>
-                  <option value="football">Football</option>
-                  <option value="cooking">Cooking</option>
-                </select>
-                <label htmlFor="order">Order</label>
-                <select onChange={this.handleChange} name="orderBy" value={this.state.filters.orderBy}>
-                  <option value="desc">Descending</option>
-                  <option value="asc">Ascending</option>
-                </select>
-                <label htmlFor="author">Author</label>
-                <input onChange={this.handleChange} type="text" name='author' value={this.state.filters.author}/>
-                <input type="submit" value='Search'/>
-              </form>
+              <ArticleFilter 
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                sortBy={this.state.filters.sortBy}
+                topic={this.state.filters.topic}
+                orderBy={this.state.filters.orderBy}
+                author={this.state.filters.author}
+                />
           }
         </div>
         <ul className={styles.list}>
@@ -93,7 +79,7 @@ class ArticleList extends Component {
             })
           }
         </ul>
-      </>
+      </section>
     );
   }
 

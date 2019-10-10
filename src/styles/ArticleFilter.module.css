@@ -1,0 +1,8 @@
+.form {
+  display: grid;
+  grid-area:
+    'order sort'
+    'topics topics'
+    'author author'
+    'search search';
+}

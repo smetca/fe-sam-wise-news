@@ -29,5 +29,5 @@
 }
 
 .button:disabled {
-  color: blue;
+  color: rgb(3, 96, 150);
 }

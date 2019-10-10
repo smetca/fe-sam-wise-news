@@ -35,8 +35,17 @@
   flex-direction: column;
 }
 
+
 .navlist li:hover {
   background-color: rgb(51, 57, 59);
+}
+
+.navlist li:nth-child(2) {
+  background-color: rgb(50, 54, 56);
+}
+
+.navlist li:nth-child(4) > button {
+  background-color: rgb(50, 54, 56);
 }
 
 .navlist li:last-child .link {
@@ -51,4 +60,10 @@
   color: white;
   text-decoration: none;
   border-bottom: white solid 1px;
+}
+
+.link img {
+  max-width: 1.5em;
+  border-radius: 50%;
+  margin-left: 0.3em;
 }

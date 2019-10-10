@@ -40,3 +40,13 @@ export const deleteComment = async (id) => {
   const response = await request.delete(`/comments/${id}`);
   return response.status;
 }
+
+export const getUsers = async () => {
+  const response = await request.get('/users');
+  return response.data.users;
+}
+
+export const getUser = async (username) => {
+  const response = await request.get(`/users/${username}`);
+  return response.data.user;
+}

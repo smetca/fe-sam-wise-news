@@ -3,6 +3,7 @@ button {
 }
 
 .app {
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 5fr 1fr;
   grid-template-rows: 4.5rem 1fr;

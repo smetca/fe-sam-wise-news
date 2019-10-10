@@ -10,6 +10,10 @@
   background-color: rgb(32, 32, 32);
 }
 
+.nav button:hover {
+  background-color: rgb(68, 68, 68);
+}
+
 .navlist {
   background-color: rgb(32, 38, 41);
   list-style-type: none;
@@ -38,14 +42,6 @@
 
 .navlist li:hover {
   background-color: rgb(51, 57, 59);
-}
-
-.navlist li:nth-child(2) {
-  background-color: rgb(50, 54, 56);
-}
-
-.navlist li:nth-child(4) > button {
-  background-color: rgb(50, 54, 56);
 }
 
 .navlist li:last-child .link {

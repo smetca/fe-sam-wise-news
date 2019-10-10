@@ -2,8 +2,45 @@
   display: flex;
   flex-direction: column;
   text-align: center;
+  border-bottom: 1px solid black;
 }
 
 .article p {
   color: rgb(53, 53, 53);
+}
+
+.article h2 {
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 2px solid black;
+}
+
+.info {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  padding: 0.8em 0;
+  border-top: 1px solid black;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.created svg {
+  padding-right: 0.6em;
+}
+
+.topic svg {
+  padding-right: 0.6em;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+}
+
+.author img {
+  margin-right: 0.6em;
+  max-width: 2em;
+  border-radius: 50%;
+  border: black solid 1px;
 }

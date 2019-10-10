@@ -42,7 +42,7 @@ class App extends Component {
         <Router primary={false} className='viewport'>
           <Home path='/' />
           <Articles path='/articles' />
-          <SingleArticle path='/articles/:article_id' username={this.state.username} />
+          <SingleArticle path='/articles/:article_id' {...this.state} />
           <Login path='/login' changeUser={this.changeUser} />
           <User path='/user' {...this.state}/>
         </Router>

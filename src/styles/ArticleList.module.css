@@ -10,11 +10,24 @@
   flex-direction: column;
 }
 
+.heading {
+  background-color: whitesmoke;
+  text-align: center;
+  padding: 1rem 0;
+  border-bottom: black solid 1px;
+  margin: 0;
+}
+
 .filter button {
   width: 100%;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
   border: 0;
   border-bottom: black solid 1px;
-  background-color: grey;
+  background-color: #133C55;
   color: white;
+  font-size: 110%;
+}
+
+.filter button:hover {
+  background-color: #507FA0;
 }

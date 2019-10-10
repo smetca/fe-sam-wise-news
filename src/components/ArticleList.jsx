@@ -3,6 +3,7 @@ import styles from '../styles/ArticleList.module.css';
 import * as api from '../utils/api';
 import ArticleCard from './ArticleCard';
 import ArticleFilter from './ArticleFilter';
+import Loader from './Loader';
 
 class ArticleList extends Component {
 
@@ -51,13 +52,12 @@ class ArticleList extends Component {
 
   render() {
     const {articles, isLoading, displayFilter} = this.state;
-    if(isLoading) return (
-      <p>Loading...</p>
-    )
+    if(isLoading) return <Loader loading={isLoading} />
     return (
       <section className={styles.articles}>
+        <h2 className={styles.heading}>Articles</h2>
         <div className={styles.filter}>
-          <button onClick={this.toggleDisplayFilter}>Filters</button>
+          <button onClick={this.toggleDisplayFilter}>Filters {displayFilter ? '-' : '+'}</button>
           {
             displayFilter &&
               <ArticleFilter 

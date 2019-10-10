@@ -14,7 +14,7 @@ class SingleArticle extends Component {
     if(isLoading) return <p>Loading...</p>
     return (
       <section>
-        <Article article={article}/>
+        <Article article={article} username={this.props.username} avatar={this.props.avatar_url} name={this.props.name}/>
         <CommentList username={this.props.username} article_id={article.article_id}/>
       </section>
     );

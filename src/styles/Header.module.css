@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: center;
   background-color: rgb(3, 96, 150);
+  border-bottom: black solid 2px;
   color: whitesmoke;
   font-family: Cinzel, Impact, sans-serif;
 }

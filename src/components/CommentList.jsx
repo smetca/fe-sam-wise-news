@@ -55,7 +55,6 @@ class CommentList extends Component {
   render() {
     const {comments, isLoading, displayFilter} = this.state;
     const {username, article_id} = this.props;
-    console.log(username);
     if(isLoading) return <p>Loading...</p>
     return (
       <section>

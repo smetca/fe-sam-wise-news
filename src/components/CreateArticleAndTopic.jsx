@@ -5,8 +5,8 @@ import {Link} from '@reach/router'
 const CreateArticleAndTopic = () => {
   return (
     <section className={styles.create}>
-      <h2>Create Article</h2>
-      <Link to='/'>Create Article</Link>
+      <h2 className={styles.heading}>Create Article</h2>
+      <Link className={styles['create-article']} to='/'>Create Article</Link>
     </section>
   );
 }

@@ -1,30 +1,27 @@
 import React, { Component } from 'react';
 import styles from '../styles/ArticleShowcase.module.css';
-import {Link} from '@reach/router'
+import {Link} from '@reach/router';
+import * as api from '../utils/api';
+import Moment from 'react-moment';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCalendarAlt, faArrowCircleUp, faCommentAlt} from '@fortawesome/free-solid-svg-icons';
 
 class ArticleShowcase extends Component {
   state = {
-    article: {
-      title: "Seafood substitutions are increasing",
-      topic: "cooking",
-      author: "weegembump",
-      article_id: 1,
-      votes: 20,
-      body: `Text from the article is here and I must type enough to fill the ellipses lorem ipsum dolor blah blah blah something something something really. This is a sentence of some sort. Keep reading until the ellipses
-        The dog crossed the road with his owner, and something happened. Look at that in the distance something something
-        lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor words words words words`,
-      created_at: 1527695953341,
-      comment_count: 100
-    }
+    article: null,
+    isLoading: true
   }
 
   render() {
-    const { article } = this.state;
+    const { article, isLoading } = this.state;
+    if(isLoading) return <p>Loading...</p> 
     return (
       <section className={styles.showcase}>
-        <h2>Top Article</h2>
+        <h2 className={styles.heading}>Top Article</h2>
         <article>
-          <h3>{article.title}</h3>
+          <h3 className={styles.title}>{article.title}</h3>
+          <Link className={styles['body-link']} to={`articles/${article.article_id}`}>
+          <div className={styles.body}>
           {
             article.body.length >= 300
               ? article.body
@@ -43,13 +40,28 @@ class ArticleShowcase extends Component {
                     return <p key={index}>{paragraph}</p>
                   })
           }
+          </div>
+          </Link>
         </article>
-        <Link to='/articles'>
+        <div className={styles.info}>
+          <span className={styles.date}><FontAwesomeIcon icon={faCalendarAlt}/> <em><Moment date={article.created_at} fromNow/></em></span>
+          <span className={styles.votes}><FontAwesomeIcon icon={faArrowCircleUp}/> {article.votes}</span>
+          <span className={styles.comments}><FontAwesomeIcon icon={faCommentAlt}/> {article.comment_count}</span>
+        </div>
+        <Link to='/articles' className={styles['articles-link']}>
           View All Articles
         </Link>
       </section>
     );
   }
+
+  componentDidMount() {
+    api.getArticles({limit: 1, sortBy: 'votes'})
+      .then(([article]) => {
+        this.setState({article, isLoading: false})
+      })
+  }
+
 }
  
 export default ArticleShowcase;

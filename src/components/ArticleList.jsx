@@ -22,6 +22,16 @@ class ArticleList extends Component {
     }
   }
 
+  fetchArticles = () => {
+    api.getArticles(this.state.filters)
+      .then(articles => {
+        this.setState({articles, isLoading: false})
+      })
+      .catch(error => {
+        this.setState({error, isLoading: false})
+      })
+  }
+
   toggleDisplayFilter = (event) => {
     event.preventDefault();
     this.setState(({displayFilter}) => {
@@ -46,13 +56,7 @@ class ArticleList extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    api.getArticles(this.state.filters)
-      .then(articles => {
-        this.setState({articles})
-      })
-      .catch(error => {
-        this.setState({error, isLoading: false})
-      })
+    this.fetchArticles();
   }
 
   render() {
@@ -90,13 +94,7 @@ class ArticleList extends Component {
   }
 
   componentDidMount() {
-    api.getArticles(this.state.filters)
-      .then(articles => {
-        this.setState({articles, isLoading: false})
-      })
-      .catch(error => {
-        this.setState({error, isLoading: false})
-      })
+    this.fetchArticles();
   }
 }
  

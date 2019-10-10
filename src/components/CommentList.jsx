@@ -20,6 +20,17 @@ class CommentList extends Component {
     }
   }
 
+  fetchArticleComments = () => {
+    const {article_id} = this.props;
+    api.getArticleComments(article_id, this.state.filters)
+      .then(comments => {
+        this.setState({comments, isLoading: false})
+      })
+      .catch(error => {
+        this.setState({error, isLoading: false})
+      })
+  }
+
   toggleDisplayFilter = (event) => {
     event.preventDefault();
     this.setState(({displayFilter}) => {
@@ -44,13 +55,7 @@ class CommentList extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    api.getArticleComments(this.props.article_id, this.state.filters)
-      .then(comments => {
-        this.setState({comments})
-      })
-      .catch(error => {
-        this.setState({error, isLoading: false})
-      })
+    this.fetchArticleComments();
   }
 
   updateComments = (comment) => {
@@ -94,14 +99,7 @@ class CommentList extends Component {
   }
 
   componentDidMount() {
-    const {article_id} = this.props;
-    api.getArticleComments(article_id, this.state.filters)
-      .then(comments => {
-        this.setState({comments, isLoading: false})
-      })
-      .catch(error => {
-        this.setState({error, isLoading: false})
-      })
+    this.fetchArticleComments();
   }
 }
  

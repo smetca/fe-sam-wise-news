@@ -6,7 +6,7 @@ import {faArrowAltCircleUp, faArrowAltCircleDown} from '@fortawesome/free-solid-
 
 class Voter extends Component {
   state = {
-    voteChange: 0,
+    voteChange: 0
   }
 
   handleVote = (event) => {

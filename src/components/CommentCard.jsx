@@ -2,11 +2,18 @@ import React, {Component} from 'react';
 import Voter from './Voter';
 import * as api from '../utils/api'
 import Moment from 'react-moment';
+import styles from '../styles/CommentCard.module.css'
+import ErrorHandler from './ErrorHandler';
+import Loader from './Loader';
 
 class CommentCard extends Component {
 
   state = {
-    deleted: false
+    deleted: false,
+    error: null,
+    isLoading: true,
+    username: '',
+    avatar: '',
   }
 
   deleteComment = (event) => {
@@ -15,29 +22,44 @@ class CommentCard extends Component {
     if(window.confirm('Do you want to delete this comment?')) {
       this.setState({deleted: true});
       api.deleteComment(comment.comment_id)
-        .then(status => {
-
+        .catch(error => {
+          this.setState({deleted: false})
         })
-        .catch(console.dir)
     }
   }
 
   render() {
-    const {deleted} = this.state;
+    const {deleted, avatar, isLoading, error} = this.state;
     const {comment, username} = this.props;
+    if(isLoading) return <Loader loading={isLoading}/>
+    if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg} />
     if(deleted) return <li>Comment deleted</li>
     return (
-        <li>
+        <li className={styles.comment}>
           <p>{comment.body}</p>
-          <span>{comment.author}</span>
-          <span>Created: <Moment date={comment.created_at} fromNow/></span>
+          <div className={styles['author-wrapper']}>
+            <div className={styles.author}>
+              <span><img src={avatar} alt="Users Avatar"/> {comment.author}</span>
+              <span>Created: <Moment date={comment.created_at} fromNow/></span>
+            </div>
+            {
+              username === comment.author && <button className={styles.delete} onClick={this.deleteComment}>Delete Comment</button>
+            }
+          </div>
           <Voter id={comment.comment_id} votes={comment.votes} type={'comment'}/>
-          {
-            username === comment.author && <button onClick={this.deleteComment}>Delete Comment</button>
-          }
         </li>
     );
 
+  }
+
+  componentDidMount() {
+    api.getUser(this.props.comment.author)
+      .then(user => {
+        this.setState({username: user.username, avatar: user.avatar_url, isLoading: false})
+      })
+      .catch(error => {
+        this.setState({error, isLoading: false})
+      })
   }
 }
  

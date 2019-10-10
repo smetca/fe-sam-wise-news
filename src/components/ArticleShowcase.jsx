@@ -6,23 +6,26 @@ import Moment from 'react-moment';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCalendarAlt, faArrowCircleUp, faCommentAlt} from '@fortawesome/free-solid-svg-icons';
 import Loader from './Loader';
+import ErrorHandler from './ErrorHandler';
 
 class ArticleShowcase extends Component {
   state = {
     article: null,
-    isLoading: true
+    isLoading: true,
+    error: null
   }
 
   render() {
-    const { article, isLoading } = this.state;
+    const { article, isLoading, error } = this.state;
     if(isLoading) return <Loader loading={isLoading}/>
+    if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg}/>
     else {
       return (
         <section className={styles.showcase}>
           <h2 className={styles.heading}>Top Article</h2>
           <article>
-            <h3 className={styles.title}>{article.title}</h3>
             <Link className={styles['body-link']} to={`articles/${article.article_id}`}>
+            <h3 className={styles.title}>{article.title}</h3>
             <div className={styles.body}>
             {
               article.body.length >= 300
@@ -62,6 +65,9 @@ class ArticleShowcase extends Component {
     api.getArticles({limit: 1, sortBy: 'votes'})
       .then(([article]) => {
         this.setState({article, isLoading: false})
+      })
+      .catch(error => {
+        this.setState({error, isLoading: false})
       })
   }
 

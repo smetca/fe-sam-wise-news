@@ -6,7 +6,7 @@ const CreateArticleAndTopic = () => {
   return (
     <section className={styles.create}>
       <h2 className={styles.heading}>Create Article</h2>
-      <Link className={styles['create-article']} to='/'>Create Article</Link>
+      <Link to='/' className={styles['create-article']}>Create Article</Link>
     </section>
   );
 }

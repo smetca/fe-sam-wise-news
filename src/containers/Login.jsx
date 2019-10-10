@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
+import Loader from '../components/Loader';
 
 class Login extends Component {
 
@@ -23,8 +24,7 @@ class Login extends Component {
 
   render() {
     const {isLoading, users} = this.state;
-    console.dir(users);
-    if(isLoading) return <p>Loading...</p>
+    if(isLoading) return <Loader loading={isLoading} />
     return (
       <section>
         <h2>Login</h2>

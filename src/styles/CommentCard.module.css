@@ -1,0 +1,27 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  border-top: black solid 1px;
+  border-bottom: black solid 1px;
+}
+
+.comment img {
+  max-width: 1rem;
+  border-radius: 50%;
+}
+
+.author-wrapper {
+  display: flex;
+  justify-content: space-around;
+  border-top: black solid 1px;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete {
+  background-color: #133C55;
+}

@@ -16,6 +16,7 @@ const ArticleFilter = ({
         <option value="votes">Votes</option>
         <option value="title">Title</option>
         <option value="created_at">Date</option>
+        <option value="comment_count">Comments</option>
       </select>
       <label htmlFor="order">Order</label>
       <select onChange={handleChange} name="orderBy" value={orderBy}>

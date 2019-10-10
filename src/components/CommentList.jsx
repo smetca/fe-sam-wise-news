@@ -3,12 +3,16 @@ import styles from '../styles/CommentList.module.css'
 import CommentCard from './CommentCard';
 import CreateComment from './CreateComment';
 import * as api from '../utils/api'
+import CommentFilter from './CommentFilter';
+import Loader from './Loader';
+import ErrorHandler from './ErrorHandler';
 
 class CommentList extends Component {
 
   state = {
     comments: null,
     isLoading: true,
+    error: null,
     displayFilter: false,
     filters: {
       sortBy: 'votes',
@@ -44,6 +48,9 @@ class CommentList extends Component {
       .then(comments => {
         this.setState({comments})
       })
+      .catch(error => {
+        this.setState({error, isLoading: false})
+      })
   }
 
   updateComments = (comment) => {
@@ -53,30 +60,26 @@ class CommentList extends Component {
   }
 
   render() {
-    const {comments, isLoading, displayFilter} = this.state;
+    const {comments, isLoading, displayFilter, error} = this.state;
     const {username, article_id} = this.props;
-    if(isLoading) return <p>Loading...</p>
+    console.log(username);
+    if(isLoading) return <Loader loading={isLoading}/>
+    if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg}/>
     return (
-      <section>
-        <h3>Comments</h3>
-        <button onClick={this.toggleDisplayFilter}>Filter</button>
-        <CreateComment username={username} id={article_id} updateComments={this.updateComments}/>
+      <section className={styles.comments}>
+        <div className={styles.heading}>
+          <h3 className={styles.heading}>Comments</h3>
+          <button onClick={this.toggleDisplayFilter}>Filter</button>
+        </div>
         {
-          displayFilter && <form onSubmit={this.handleSubmit}>
-            <label htmlFor="sortBy">Sort By</label>
-            <select onChange={this.handleChange} name="sortBy" value={this.state.filters.sortBy}>
-              <option value="votes">Votes</option>
-              <option value="author">Author</option>
-              <option value="created_at">Date</option>
-            </select>
-            <label htmlFor="order">Order</label>
-            <select onChange={this.handleChange} name="orderBy" value={this.state.filters.orderBy}>
-              <option value="desc">Descending</option>
-              <option value="asc">Ascending</option>
-            </select>
-            <input type="submit" value='Search'/>
-          </form>
+          displayFilter && <CommentFilter
+            handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
+            sortBy={this.state.filters.sortBy}
+            orderBy={this.state.filters.orderBy}
+          />
         }
+        <CreateComment username={username} id={article_id} updateComments={this.updateComments}/>
         <ul className={styles.comments}>
           {
             comments && comments.map(comment => {
@@ -95,6 +98,9 @@ class CommentList extends Component {
     api.getArticleComments(article_id, this.state.filters)
       .then(comments => {
         this.setState({comments, isLoading: false})
+      })
+      .catch(error => {
+        this.setState({error, isLoading: false})
       })
   }
 }

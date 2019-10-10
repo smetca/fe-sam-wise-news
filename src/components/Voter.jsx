@@ -6,7 +6,7 @@ import {faArrowAltCircleUp, faArrowAltCircleDown} from '@fortawesome/free-solid-
 
 class Voter extends Component {
   state = {
-    voteChange: 0
+    voteChange: 0,
   }
 
   handleVote = (event) => {
@@ -17,7 +17,7 @@ class Voter extends Component {
         return {voteChange: voteChange + vote}
       })
       api.updateVote({inc_votes: vote}, event.currentTarget.name, this.props.type)
-        .catch(err => {
+        .catch(() => {
           this.setState(({voteChange}) => {
             return {voteChange: voteChange - vote}
           })

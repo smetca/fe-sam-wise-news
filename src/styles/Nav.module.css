@@ -22,7 +22,7 @@
   display: none;
   flex-direction: column;
   position: absolute;
-  width: 250px;
+  width: 12rem;
   top: 4.5rem;
   right: 0;
   z-index: 100;

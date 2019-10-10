@@ -4,12 +4,14 @@ import * as api from '../utils/api';
 import ArticleCard from './ArticleCard';
 import ArticleFilter from './ArticleFilter';
 import Loader from './Loader';
+import ErrorHandler from './ErrorHandler';
 
 class ArticleList extends Component {
 
   state = {
     articles: null,
     isLoading: true,
+    error: null,
     displayFilter: false,
     filters: {
       author: '',
@@ -48,11 +50,15 @@ class ArticleList extends Component {
       .then(articles => {
         this.setState({articles})
       })
+      .catch(error => {
+        this.setState({error, isLoading: false})
+      })
   }
 
   render() {
-    const {articles, isLoading, displayFilter} = this.state;
+    const {articles, isLoading, displayFilter, error} = this.state;
     if(isLoading) return <Loader loading={isLoading} />
+    if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg}/>
     return (
       <section className={styles.articles}>
         <h2 className={styles.heading}>Articles</h2>
@@ -87,6 +93,9 @@ class ArticleList extends Component {
     api.getArticles(this.state.filters)
       .then(articles => {
         this.setState({articles, isLoading: false})
+      })
+      .catch(error => {
+        this.setState({error, isLoading: false})
       })
   }
 }

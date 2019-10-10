@@ -15,7 +15,7 @@ class App extends Component {
   state = {
     username: '',
     avatar_url: '',
-    name: ''
+    name: '',
   }
 
   changeUser = (username) => {

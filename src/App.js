@@ -9,6 +9,8 @@ import SingleArticle from './containers/SingleArticle';
 import Login from './containers/Login';
 import * as api from './utils/api'
 import User from './components/User';
+import CreateArticle from './containers/CreateArticle';
+import EndpointError from './components/EndpointError';
 
 class App extends Component {
 
@@ -45,6 +47,8 @@ class App extends Component {
           <SingleArticle path='/articles/:article_id' {...this.state} />
           <Login path='/login' changeUser={this.changeUser} />
           <User path='/user' {...this.state}/>
+          <CreateArticle path='/article/create' />
+          <EndpointError default />
         </Router>
       </main>
     );

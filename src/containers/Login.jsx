@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 import Loader from '../components/Loader';
+import styles from '../styles/Login.module.css';
 
 class Login extends Component {
 
@@ -26,7 +27,7 @@ class Login extends Component {
     const {isLoading, users} = this.state;
     if(isLoading) return <Loader loading={isLoading} />
     return (
-      <section>
+      <section className={styles.login}>
         <h2>Login</h2>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username</label>

@@ -1,0 +1,43 @@
+.article {
+  display: grid;
+  grid-template-rows: 1fr 3em 2em;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: black solid 2px;
+}
+
+.article:last-child {
+  border-bottom: 0;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-row: 1;
+  grid-column: span 4;
+  color: black;
+}
+
+.title h3 {
+  text-align: center;
+}
+
+.created {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-row: 3;
+  grid-column: span 2;
+}
+
+.created time {
+  padding-left: 0.3em;
+}
+
+.comments {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-row: 3;
+  grid-column: span 2;
+}

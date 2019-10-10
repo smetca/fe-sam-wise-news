@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from '@reach/router';
-import styles from '../styles/ArticleList.module.css';
+import styles from '../styles/ArticleCard.module.css';
 import Voter from './Voter';
 import Moment from 'react-moment';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCalendarAlt, faCommentAlt} from '@fortawesome/free-solid-svg-icons';
 
 class ArticleCard extends Component {
   state = {}
@@ -11,11 +13,11 @@ class ArticleCard extends Component {
     const {article} = this.props;
     return (
       <li className={styles.article}>
-        <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
-        <p>Created: <Moment date={article.created_at} fromNow/></p>
+        <Link className={styles.title} to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
+        <span className={styles.created}><FontAwesomeIcon icon={faCalendarAlt}/><em><Moment date={article.created_at} fromNow/></em></span>
         <Voter id={article.article_id} votes={article.votes}/>
         <div className={styles.comments}>
-          <span>Comments: {article.comment_count}</span>
+          <span><FontAwesomeIcon icon={faCommentAlt}/> {article.comment_count}</span>
         </div>
       </li>
     );

@@ -43,6 +43,9 @@
 
 .body {
   text-align: center;
+  border-bottom: black solid 1px;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
 }
 
 .body-link {
@@ -54,5 +57,6 @@
 .info {
   display: flex;
   width: 100%;
+  padding-top: 0.5em;
   justify-content: space-around;
 }

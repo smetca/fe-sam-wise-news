@@ -24,4 +24,6 @@
 
 .delete {
   background-color: #133C55;
+  border: 0;
+  color: white;
 }

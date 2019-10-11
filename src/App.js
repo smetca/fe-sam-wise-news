@@ -27,7 +27,9 @@ class App extends Component {
     } else {
       api.getUser(username)
         .then(user => {
-          console.log(user);
+          localStorage.setItem('username', user.username);
+          localStorage.setItem('avatar_url', user.avatar_url);
+          localStorage.setItem('name', user.name);
           this.setState({
             username: user.username,
             avatar_url: user.avatar_url,
@@ -54,6 +56,12 @@ class App extends Component {
         </Router>
       </main>
     );
+  }
+
+  componentDidMount() {
+    if(localStorage.getItem('username')) {
+      this.setState({username: localStorage.getItem('username'), avatar_url: localStorage.getItem('avatar_url'),  name: localStorage.getItem('name')});
+    }
   }
 }
 

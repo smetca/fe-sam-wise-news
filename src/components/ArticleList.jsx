@@ -130,6 +130,26 @@ class ArticleList extends Component {
     this.fetchArticles();
     this.addScrollEventListener();
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {author, topic, sortBy, orderBy} = prevState.filters;
+    let isDifferent = false;
+    if(author !== this.state.filters.author) isDifferent = true;
+    if(topic !== this.state.filters.topic) isDifferent = true;
+    if(sortBy !== this.state.filters.sortBy) isDifferent = true;
+    if(orderBy !== this.state.filters.orderBy) isDifferent = true;
+    if(isDifferent) {
+      this.setState((currentState) => {
+        const {p, ...rest} = currentState.filters;
+        return {
+          filters: {
+            p: 1,
+            ...rest
+          }
+        }
+      })
+    }
+  }
 }
  
 export default ArticleList;

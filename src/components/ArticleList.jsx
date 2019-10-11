@@ -5,6 +5,7 @@ import ArticleCard from './ArticleCard';
 import ArticleFilter from './ArticleFilter';
 import Loader from './Loader';
 import ErrorHandler from './ErrorHandler';
+import throttle from 'lodash.throttle';
 
 class ArticleList extends Component {
 
@@ -13,19 +14,51 @@ class ArticleList extends Component {
     isLoading: true,
     error: null,
     displayFilter: false,
+    maxPage: 1,
     filters: {
       author: '',
       topic: '',
       sortBy: 'votes',
       orderBy: 'desc',
-      limit: '5'
+      limit: '5',
+      p: 1
     }
   }
 
+  addScrollEventListener = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = throttle((event) => {
+    const distanceFromTop = window.scrollY;
+    const heightOfScreen = window.innerHeight;
+    const documentHeight = document.body.scrollHeight;
+
+    if(documentHeight - 400 <= distanceFromTop + heightOfScreen && this.state.filters.p < this.state.maxPage) {
+      this.setState(({filters}) => {
+        const {p, ...rest} = filters;
+        return {
+          filters: {
+            p: p+1,
+            ...rest
+          }
+        }
+      }, () => {
+        api.getArticles(this.state.filters)
+          .then(({articles}) => {
+            this.setState((currentState) => {
+              return {articles: [...currentState.articles, ...articles]}
+            })
+          })
+      })
+    }
+  }, 2000)
+
   fetchArticles = () => {
     api.getArticles(this.state.filters)
-      .then(articles => {
-        this.setState({articles, isLoading: false})
+      .then(({articles, total_count}) => {
+        const maxPage = Math.ceil(total_count / this.state.filters.limit);
+        this.setState({articles, isLoading: false, maxPage})
       })
       .catch(error => {
         this.setState({error, isLoading: false})
@@ -95,6 +128,7 @@ class ArticleList extends Component {
 
   componentDidMount() {
     this.fetchArticles();
+    this.addScrollEventListener();
   }
 }
  

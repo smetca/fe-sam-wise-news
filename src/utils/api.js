@@ -6,7 +6,7 @@ export const getArticles = async (filters) => {
   const response = await request.get('/articles', {
     params: filters
   });
-  return response.data.articles;
+  return response.data;
 }
 
 export const getArticle = async (article_id) => {

@@ -63,10 +63,11 @@ class ArticleShowcase extends Component {
 
   componentDidMount() {
     api.getArticles({limit: 1, sortBy: 'votes'})
-      .then(([article]) => {
+      .then(({articles: [article]}) => {
         this.setState({article, isLoading: false})
       })
       .catch(error => {
+        console.dir(error);
         this.setState({error, isLoading: false})
       })
   }

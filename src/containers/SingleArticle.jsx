@@ -20,7 +20,7 @@ class SingleArticle extends Component {
     return (
       <section>
         <Article article={article} username={this.props.username} avatar={this.props.avatar_url} name={this.props.name}/>
-        <CommentList article_id={article.article_id} username={this.props.username}/>
+        <CommentList article_id={article.article_id} comment_count={article.comment_count} username={this.props.username}/>
       </section>
     );
   }

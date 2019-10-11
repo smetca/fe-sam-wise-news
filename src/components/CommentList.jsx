@@ -6,6 +6,7 @@ import * as api from '../utils/api'
 import CommentFilter from './CommentFilter';
 import Loader from './Loader';
 import ErrorHandler from './ErrorHandler';
+import throttle from 'lodash.throttle';
 
 class CommentList extends Component {
 
@@ -14,17 +15,50 @@ class CommentList extends Component {
     isLoading: true,
     error: null,
     displayFilter: false,
+    maxPage: 1,
     filters: {
       sortBy: 'votes',
-      orderBy: 'desc'
+      orderBy: 'desc',
+      limit: '5',
+      p: 1
     }
   }
 
+  addScrollEventListener = () => {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = throttle((event) => {
+    const distanceFromTop = window.scrollY;
+    const heightOfScreen = window.innerHeight;
+    const documentHeight = document.body.scrollHeight;
+
+    if(documentHeight - 400 <= distanceFromTop + heightOfScreen && this.state.filters.p < this.state.maxPage) {
+      this.setState(({filters}) => {
+        const {p, ...rest} = filters;
+        return {
+          filters: {
+            p: p+1,
+            ...rest
+          }
+        }
+      }, () => {
+        api.getArticleComments(this.props.article_id, this.state.filters)
+          .then(comments => {
+            this.setState((currentState) => {
+              return {comments: [...currentState.comments, ...comments]}
+            })
+          })
+      })
+    }
+  }, 2000)
+
   fetchArticleComments = () => {
-    const {article_id} = this.props;
+    const {article_id, comment_count} = this.props;
     api.getArticleComments(article_id, this.state.filters)
       .then(comments => {
-        this.setState({comments, isLoading: false})
+        const maxPage = Math.ceil(comment_count / this.state.filters.limit)
+        this.setState({comments, isLoading: false, maxPage})
       })
       .catch(error => {
         this.setState({error, isLoading: false})
@@ -66,14 +100,14 @@ class CommentList extends Component {
 
   render() {
     const {comments, isLoading, displayFilter, error} = this.state;
-    const {username, article_id} = this.props;
+    const {username, article_id, comment_count} = this.props;
     console.log(username);
     if(isLoading) return <Loader loading={isLoading}/>
     if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg}/>
     return (
       <section className={styles.comments}>
         <div className={styles.heading}>
-          <h3 className={styles.heading}>Comments</h3>
+          <h3 className={styles.heading}>Comments | {comment_count}</h3>
           <button onClick={this.toggleDisplayFilter}>Filter</button>
         </div>
         {
@@ -100,6 +134,7 @@ class CommentList extends Component {
 
   componentDidMount() {
     this.fetchArticleComments();
+    this.addScrollEventListener();
   }
 }
  

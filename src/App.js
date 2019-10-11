@@ -11,6 +11,7 @@ import * as api from './utils/api'
 import User from './components/User';
 import CreateArticle from './containers/CreateArticle';
 import EndpointError from './components/EndpointError';
+import LoggedIn from './components/LoggedIn';
 
 class App extends Component {
 
@@ -41,6 +42,7 @@ class App extends Component {
       <main className='app'>
         <Header />
         <Nav username={this.state.username} avatar={this.state.avatar_url} changeUser={this.changeUser} />
+        <LoggedIn {...this.state}/>
         <Router primary={false} className='viewport'>
           <Home path='/' />
           <Articles path='/articles' />

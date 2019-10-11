@@ -1,0 +1,20 @@
+.login {
+  grid-column: span 2;
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ADD7F6;
+  border-bottom: black solid 1px;
+}
+
+.login img {
+  max-width: 1rem;
+  border-radius: 50%;
+}
+
+.login em {
+  font-size: 90%;
+  color: rgb(44, 44, 44);
+  padding-right: 0.2rem;
+}

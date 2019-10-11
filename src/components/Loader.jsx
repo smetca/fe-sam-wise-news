@@ -8,7 +8,7 @@ const Loader = ({loading}) => {
       <RingLoader
         sizeUnit={"em"}
         size={2}
-        color={'#123abc'}
+        color={'#122C55'}
         loading={loading}
       />
     </div>

@@ -136,6 +136,24 @@ class CommentList extends Component {
     this.fetchArticleComments();
     this.addScrollEventListener();
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {sortBy, orderBy} = prevState.filters;
+    let isDifferent = false;
+    if(sortBy !== this.state.filters.sortBy) isDifferent = true;
+    if(orderBy !== this.state.filters.orderBy) isDifferent = true;
+    if(isDifferent) {
+      this.setState((currentState) => {
+        const {p, ...rest} = currentState.filters;
+        return {
+          filters: {
+            p: 1,
+            ...rest
+          }
+        }
+      })
+    }
+  }
 }
  
 export default CommentList;

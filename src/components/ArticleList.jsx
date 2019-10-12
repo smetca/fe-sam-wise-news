@@ -12,6 +12,7 @@ class ArticleList extends Component {
   state = {
     articles: null,
     isLoading: true,
+    pageLoading: false,
     error: null,
     displayFilter: false,
     maxPage: 1,
@@ -20,7 +21,7 @@ class ArticleList extends Component {
       topic: '',
       sortBy: 'votes',
       orderBy: 'desc',
-      limit: '5',
+      limit: '10',
       p: 1
     }
   }
@@ -34,25 +35,26 @@ class ArticleList extends Component {
     const heightOfScreen = window.innerHeight;
     const documentHeight = document.body.scrollHeight;
 
-    if(documentHeight - 400 <= distanceFromTop + heightOfScreen && this.state.filters.p < this.state.maxPage) {
+    if(documentHeight - 500 <= distanceFromTop + heightOfScreen && this.state.filters.p < this.state.maxPage) {
       this.setState(({filters}) => {
         const {p, ...rest} = filters;
         return {
           filters: {
             p: p+1,
             ...rest
-          }
+          },
+          pageLoading: true
         }
       }, () => {
         api.getArticles(this.state.filters)
           .then(({articles}) => {
             this.setState((currentState) => {
-              return {articles: [...currentState.articles, ...articles]}
+              return {articles: [...currentState.articles, ...articles], pageLoading: false}
             })
           })
       })
     }
-  }, 2000)
+  }, 1000)
 
   fetchArticles = () => {
     api.getArticles(this.state.filters)
@@ -93,7 +95,7 @@ class ArticleList extends Component {
   }
 
   render() {
-    const {articles, isLoading, displayFilter, error} = this.state;
+    const {articles, isLoading, displayFilter, error, pageLoading} = this.state;
     if(isLoading) return <Loader loading={isLoading} />
     if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg}/>
     return (
@@ -120,6 +122,11 @@ class ArticleList extends Component {
                 <ArticleCard article={article} key={article.article_id}/>
               )
             })
+          }
+          {
+            pageLoading && <li>
+              <Loader loading={pageLoading} />
+            </li>
           }
         </ul>
       </section>

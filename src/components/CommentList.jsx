@@ -13,13 +13,14 @@ class CommentList extends Component {
   state = {
     comments: null,
     isLoading: true,
+    pageLoading: false,
     error: null,
     displayFilter: false,
     maxPage: 1,
     filters: {
       sortBy: 'votes',
       orderBy: 'desc',
-      limit: '5',
+      limit: '10',
       p: 1
     }
   }
@@ -40,18 +41,19 @@ class CommentList extends Component {
           filters: {
             p: p+1,
             ...rest
-          }
+          },
+          pageLoading: true
         }
       }, () => {
         api.getArticleComments(this.props.article_id, this.state.filters)
           .then(comments => {
             this.setState((currentState) => {
-              return {comments: [...currentState.comments, ...comments]}
+              return {comments: [...currentState.comments, ...comments], pageLoading: false}
             })
           })
       })
     }
-  }, 2000)
+  }, 1300)
 
   fetchArticleComments = () => {
     const {article_id, comment_count} = this.props;
@@ -99,7 +101,7 @@ class CommentList extends Component {
   }
 
   render() {
-    const {comments, isLoading, displayFilter, error} = this.state;
+    const {comments, isLoading, displayFilter, error, pageLoading} = this.state;
     const {username, article_id, comment_count} = this.props;
     console.log(username);
     if(isLoading) return <Loader loading={isLoading}/>
@@ -126,6 +128,11 @@ class CommentList extends Component {
                 <CommentCard comment={comment} key={comment.comment_id} username={username}/>
               )
             })
+          }
+          {
+            pageLoading && <li>
+              <Loader loading={pageLoading} />
+            </li>
           }
         </ul>
       </section>

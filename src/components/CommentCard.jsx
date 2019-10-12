@@ -29,10 +29,10 @@ class CommentCard extends Component {
   }
 
   render() {
-    const {deleted, avatar, isLoading, error} = this.state;
+    const {deleted, avatar, error, isLoading} = this.state;
     const {comment, username} = this.props;
-    if(isLoading) return <Loader loading={isLoading}/>
     if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg} />
+    if(isLoading) return <Loader loading={isLoading}/>
     if(deleted) return <li>Comment deleted</li>
     return (
         <li className={styles.comment}>

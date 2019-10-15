@@ -50,3 +50,13 @@ export const getUser = async (username) => {
   const response = await request.get(`/users/${username}`);
   return response.data.user;
 }
+
+export const postArticle = async ({title, body, author, topic}) => {
+  const response = await request.post('/articles', {
+    title,
+    body,
+    author,
+    topic
+  });
+  return response.data.article;
+}

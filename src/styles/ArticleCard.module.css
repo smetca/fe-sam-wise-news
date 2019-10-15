@@ -1,8 +1,9 @@
 .article {
   display: grid;
-  grid-template-rows: 1fr 3em 2em;
+  grid-template-rows: 1fr 3em 2em 2em;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   border-bottom: black solid 2px;
+  border-radius: 5px;
 }
 
 .article:last-child {
@@ -40,4 +41,11 @@
   align-items: center;
   grid-row: 3;
   grid-column: span 2;
+}
+
+.topic {
+  grid-column: span 4;
+  grid-row: 4;
+  justify-self: center;
+  align-self: center;
 }

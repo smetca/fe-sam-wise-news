@@ -7,6 +7,7 @@ import {faCalendarAlt, faBookOpen} from '@fortawesome/free-solid-svg-icons';
 import * as api from '../utils/api';
 import Loader from './Loader';
 import ErrorHandler from './ErrorHandler';
+import {Link} from '@reach/router';
 
 class Article extends Component {
 
@@ -44,8 +45,10 @@ class Article extends Component {
             <em><Moment date={article.created_at} fromNow/></em>
           </div>
           <div className={styles.topic}>
-            <FontAwesomeIcon icon={faBookOpen} />
-            {article.topic}
+            <Link to={`/articles/topic/${article.topic}`}>
+              <FontAwesomeIcon icon={faBookOpen} />
+              {article.topic}
+            </Link>
           </div>
         </div>
         <Voter id={article.article_id} votes={article.votes} />

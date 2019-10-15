@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Voter from './Voter';
-import * as api from '../utils/api'
+import * as api from '../utils/api';
 import Moment from 'react-moment';
-import styles from '../styles/CommentCard.module.css'
+import styles from '../styles/CommentCard.module.css';
 import ErrorHandler from './ErrorHandler';
 import Loader from './Loader';
 
@@ -46,7 +46,7 @@ class CommentCard extends Component {
               username === comment.author && <button className={styles.delete} onClick={this.deleteComment}>Delete Comment</button>
             }
           </div>
-          <Voter id={comment.comment_id} votes={comment.votes} type={'comment'}/>
+          <Voter id={comment.comment_id} votes={comment.votes} type={'comment'} className={styles.voter}/>
         </li>
     );
 

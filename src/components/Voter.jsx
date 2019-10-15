@@ -28,7 +28,7 @@ class Voter extends Component {
   render() {
     const {id, votes} = this.props;
     return (
-      <div className={styles.voter}>
+      <div className={`${styles.voter} ${this.props.className}`}>
         <button className={styles.button} disabled={this.state.voteChange > 0} value='1' name={id} onClick={this.handleVote}><FontAwesomeIcon icon={faArrowAltCircleUp}/></button>
         <span className={styles.vote}>{votes + this.state.voteChange}</span>
         <button className={styles.button}disabled={this.state.voteChange < 0} value='-1' name={id} onClick={this.handleVote}><FontAwesomeIcon icon={faArrowAltCircleDown}/></button>

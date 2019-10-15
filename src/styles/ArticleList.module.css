@@ -31,3 +31,11 @@
 .filter button:hover {
   background-color: #507FA0;
 }
+
+.loader {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+}

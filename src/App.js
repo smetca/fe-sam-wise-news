@@ -8,8 +8,8 @@ import Articles from './containers/Articles';
 import SingleArticle from './containers/SingleArticle';
 import Login from './containers/Login';
 import * as api from './utils/api'
-import User from './components/User';
-import CreateArticle from './containers/CreateArticle';
+import User from './containers/User';
+import CreateArticles from './containers/CreateArticles';
 import EndpointError from './components/EndpointError';
 import LoggedIn from './components/LoggedIn';
 
@@ -40,6 +40,7 @@ class App extends Component {
   }
 
   render() {
+    const {username, avatar_url, name} = this.state;
     return (
       <main className='app'>
         <Header />
@@ -47,11 +48,11 @@ class App extends Component {
         <LoggedIn {...this.state}/>
         <Router primary={false} className='viewport'>
           <Home path='/' />
-          <Articles path='/articles' />
+          <Articles path='/articles/*' />
           <SingleArticle path='/articles/:article_id' {...this.state} />
           <Login path='/login' changeUser={this.changeUser} />
-          <User path='/user' {...this.state}/>
-          <CreateArticle path='/article/create' />
+          <User path='/user/*' myUsername={username} myAvatar={avatar_url} myName={name}/>
+          <CreateArticles path='/article/create' username={username}/>
           <EndpointError default />
         </Router>
       </main>

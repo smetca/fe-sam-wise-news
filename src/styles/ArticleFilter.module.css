@@ -1,8 +1,34 @@
 .form {
   display: grid;
-  grid-area:
-    'order sort'
-    'topics topics'
-    'author author'
-    'search search';
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 2.5rem);
+}
+
+.form > label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: black solid 1px;
+  border-bottom: black solid 1px;
+}
+
+.form > input {
+  grid-column: span 2;
+}
+
+.form select {
+  border: black solid 1px;
+  /* border-top: black solid 1px;
+  border-bottom: black solid 1px; */
+  border-radius: 5px;
+}
+
+.form select:active {
+  background-color: rgb(255, 255, 255)
+}
+
+.form input {
+  border: 0;
+  background-color: #133C55;
+  color: white;
 }

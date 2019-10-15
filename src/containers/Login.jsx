@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../utils/api';
 import Loader from '../components/Loader';
 import styles from '../styles/Login.module.css';
+import {navigate} from '@reach/router';
 
 class Login extends Component {
 
@@ -15,6 +16,7 @@ class Login extends Component {
     event.preventDefault();
     const username = this.state.selectedUser;
     this.props.changeUser(username);
+    navigate('/');
   }
 
   handleChange = (event) => {

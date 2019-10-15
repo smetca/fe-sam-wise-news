@@ -1,14 +1,17 @@
 .comment {
   display: flex;
   flex-direction: column;
-  border-radius: 6px;
-  border-top: black solid 1px;
-  border-bottom: black solid 1px;
+  border-radius: 5px;
+  border-bottom: black solid 2px;
 }
 
 .comment img {
   max-width: 1rem;
   border-radius: 50%;
+}
+
+.voter {
+  border-bottom: 0;
 }
 
 .author-wrapper {
@@ -26,4 +29,5 @@
   background-color: #133C55;
   border: 0;
   color: white;
+  border-radius: 3px;
 }

@@ -28,28 +28,30 @@ class Nav extends Component {
   }
 
   handleLogout = (event) => {
+    const {changeUser} = this.props;
     const username = ''
     this.setState({isNav: false})
-    this.props.changeUser(username);
+    changeUser(username);
   }
 
   render() {
     const {isNav} = this.state;
+    const {username} = this.props;
     return (
       <nav className={styles.nav}>
         <button onClick={this.handleNav}><FontAwesomeIcon icon={faBars} color='white'/></button>
         <ul className={isNav ? `${styles['navlist-active']} ${styles.navlist}` : styles.navlist}>
           {
-            this.props.username === '' && <li>
+            username === '' && <li>
               <Link to='/login' onClick={this.handleClick} className={styles.link}>Login</Link>
             </li>
           }
           <li><Link to='/' onClick={this.handleClick} className={styles.link}>Home</Link></li>
           <li><Link to='/articles' onClick={this.handleClick} className={styles.link}>Articles</Link></li>
           {
-            this.props.username && <>
+            username && <>
               <li>
-                <Link to='/user' onClick={this.handleClick} className={styles.link}>{this.props.username} <img src={this.props.avatar} alt="A user avatar"/></Link>
+                <Link to={`/user/${username}`} onClick={this.handleClick} className={styles.link}>{this.props.username} <img src={this.props.avatar} alt="A user avatar"/></Link>
               </li>
               <li>
                 <Link to='/' onClick={this.handleLogout} className={styles.link}>Logout</Link>

@@ -29,8 +29,17 @@
   padding-right: 0.6em;
 }
 
+.topic {
+  color: #133C45;
+}
+
 .topic svg {
   padding-right: 0.6em;
+}
+
+.topic a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .author {

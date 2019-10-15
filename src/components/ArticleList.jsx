@@ -6,10 +6,12 @@ import ArticleFilter from './ArticleFilter';
 import Loader from './Loader';
 import ErrorHandler from './ErrorHandler';
 import throttle from 'lodash.throttle';
+import {navigate} from '@reach/router';
 
 class ArticleList extends Component {
 
   state = {
+    users: null,
     articles: null,
     isLoading: true,
     pageLoading: false,
@@ -35,7 +37,7 @@ class ArticleList extends Component {
     const heightOfScreen = window.innerHeight;
     const documentHeight = document.body.scrollHeight;
 
-    if(documentHeight - 500 <= distanceFromTop + heightOfScreen && this.state.filters.p < this.state.maxPage) {
+    if(documentHeight - 400 <= distanceFromTop + heightOfScreen && this.state.filters.p < this.state.maxPage && !this.state.pageLoading) {
       this.setState(({filters}) => {
         const {p, ...rest} = filters;
         return {
@@ -54,7 +56,7 @@ class ArticleList extends Component {
           })
       })
     }
-  }, 1000)
+  }, 1300)
 
   fetchArticles = () => {
     api.getArticles(this.state.filters)
@@ -91,6 +93,11 @@ class ArticleList extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    if(this.state.filters.topic.length) {
+      navigate(`/articles/topic/${this.state.filters.topic}`);
+    } else {
+      navigate(`/articles`);
+    }
     this.fetchArticles();
   }
 
@@ -112,6 +119,7 @@ class ArticleList extends Component {
                 topic={this.state.filters.topic}
                 orderBy={this.state.filters.orderBy}
                 author={this.state.filters.author}
+                users={this.state.users}
                 />
           }
         </div>
@@ -124,7 +132,7 @@ class ArticleList extends Component {
             })
           }
           {
-            pageLoading && <li>
+            pageLoading && <li className={styles.loader}>
               <Loader loading={pageLoading} />
             </li>
           }
@@ -134,8 +142,23 @@ class ArticleList extends Component {
   }
 
   componentDidMount() {
-    this.fetchArticles();
-    this.addScrollEventListener();
+    api.getUsers()
+      .then(users => {
+        this.setState({users, isLoading: false});
+      })
+    
+    this.setState((currentState) => {
+      const {topic, ...rest} = currentState.filters;
+      return {
+        filters: {
+          topic: this.props.topic,
+          ...rest
+        }
+      }
+    }, () => {
+      this.fetchArticles();
+      this.addScrollEventListener();
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {

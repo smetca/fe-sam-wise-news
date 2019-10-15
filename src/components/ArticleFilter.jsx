@@ -7,7 +7,8 @@ const ArticleFilter = ({
   sortBy,
   topic,
   orderBy,
-  author
+  author,
+  users
 }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -18,8 +19,8 @@ const ArticleFilter = ({
         <option value="created_at">Date</option>
         <option value="comment_count">Comments</option>
       </select>
-      <label htmlFor="order">Order</label>
-      <select onChange={handleChange} name="orderBy" value={orderBy}>
+      <label className={styles.order} htmlFor="order">Order</label>
+      <select className={styles.order} onChange={handleChange} name="orderBy" value={orderBy}>
         <option value="desc">Descending</option>
         <option value="asc">Ascending</option>
       </select>
@@ -31,7 +32,14 @@ const ArticleFilter = ({
         <option value="cooking">Cooking</option>
       </select>
       <label htmlFor="author">Author</label>
-      <input onChange={handleChange} type="text" name='author' value={author}/>
+      <select onChange={handleChange} type="text" name='author' value={author}>
+        <option value="">All</option>
+        {
+          users && users.map(user => {
+            return <option value={user.username} key={user.username}>{user.username}</option>
+          })
+        }
+      </select>
       <input type="submit" value='Search'/>
     </form>
   );

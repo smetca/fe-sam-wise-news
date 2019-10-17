@@ -42,7 +42,7 @@ class Nav extends Component {
         {
           ({username, avatar_url}) => (
             <nav className={styles.nav}>
-              <button onClick={this.handleNav}><FontAwesomeIcon icon={faBars} color='white'/></button>
+              <button onClick={this.handleNav} aria-label='Nav'><FontAwesomeIcon icon={faBars} color='white'/></button>
               <ul className={isNav ? `${styles['navlist-active']} ${styles.navlist}` : styles.navlist}>
                 {
                   username === '' && <li>

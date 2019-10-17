@@ -7,6 +7,8 @@ import Loader from './Loader';
 
 class UserProfile extends Component {
 
+  _isMounted = false;
+
   state = {
     error: null,
     isLoading: true,
@@ -32,10 +34,14 @@ class UserProfile extends Component {
     if(!myUsername) {
       api.getUser(username)
         .then(user => {
-          this.setState({user, isLoading: false});
+          if(this._isMounted) {
+            this.setState({user, isLoading: false});
+          }
         })
         .catch(error => {
-          this.setState({error, isLoading: false});
+          if(this._isMounted) {
+            this.setState({error, isLoading: false});
+          }
         })
     } else if(myUsername) {
       this.setState({isLoading: false});
@@ -49,12 +55,20 @@ class UserProfile extends Component {
     } else if(!myUsername && prevProps.myUsername !== myUsername) {
       api.getUser(username)
         .then(user => {
-          this.setState({user})
+          if(this._isMounted) {
+            this.setState({user})
+          }
         })
         .catch(error => {
-          this.setState({error})
+          if(this._isMounted) {
+            this.setState({error})
+          }
         })
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 }
  

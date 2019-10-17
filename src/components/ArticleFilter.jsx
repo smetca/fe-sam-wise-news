@@ -13,26 +13,26 @@ const ArticleFilter = ({
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <label htmlFor="sortBy">Sort By</label>
-      <select onChange={handleChange} name="sortBy" value={sortBy}>
+      <select onChange={handleChange} name="sortBy" value={sortBy} aria-label='Sort By'>
         <option value="votes">Votes</option>
         <option value="title">Title</option>
         <option value="created_at">Date</option>
         <option value="comment_count">Comments</option>
       </select>
       <label className={styles.order} htmlFor="order">Order</label>
-      <select className={styles.order} onChange={handleChange} name="orderBy" value={orderBy}>
+      <select className={styles.order} onChange={handleChange} name="orderBy" value={orderBy} aria-label='Order By'>
         <option value="desc">Descending</option>
         <option value="asc">Ascending</option>
       </select>
       <label htmlFor="topic">Topics</label>
-      <select onChange={handleChange} name="topic" value={topic}>
+      <select onChange={handleChange} name="topic" value={topic} aria-label='Topics'>
         <option value="">All</option>
         <option value="coding">Coding</option>
         <option value="football">Football</option>
         <option value="cooking">Cooking</option>
       </select>
       <label htmlFor="author">Author</label>
-      <select onChange={handleChange} type="text" name='author' value={author}>
+      <select onChange={handleChange} type="text" name='author' value={author} aria-label='Author'>
         <option value="">All</option>
         {
           users && users.map(user => {

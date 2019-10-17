@@ -38,7 +38,7 @@ class CreateComment extends Component {
     const {body, error} = this.state;
     return (
       <form onSubmit={this.handleSubmit} className={styles.form}>
-        <TextareaAutosize onChange={this.handleChange} value={body} maxLength={500} className={styles.textbox} rows={3} placeholder='Write Comment here...' required/>
+        <TextareaAutosize onChange={this.handleChange} value={body} maxLength={500} className={styles.textbox} rows={3} placeholder='Write Comment here...' aria-label='New Comment' required/>
         {
           body.length > 400 && <span>{body.length}/500</span>
         }

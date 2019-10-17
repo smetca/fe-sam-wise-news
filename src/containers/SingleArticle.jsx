@@ -9,18 +9,17 @@ class SingleArticle extends Component {
   state = {
     isLoading: true,
     error: null,
-    article: null,
+    article: null
   }
 
   render() {
     const {article, isLoading, error} = this.state;
-    console.dir(this.props.username);
     if(isLoading) return <Loader loading={isLoading}/>
     if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg} />
     return (
       <section>
-        <Article article={article} username={this.props.username} avatar={this.props.avatar_url} name={this.props.name}/>
-        <CommentList article_id={article.article_id} comment_count={article.comment_count} username={this.props.username}/>
+        <Article article={article} />
+        <CommentList article_id={article.article_id} comment_count={article.comment_count} />
       </section>
     );
   }

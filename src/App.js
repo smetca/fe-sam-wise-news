@@ -12,18 +12,19 @@ import User from './containers/User';
 import CreateArticles from './containers/CreateArticles';
 import EndpointError from './components/EndpointError';
 import LoggedIn from './components/LoggedIn';
+import UserContext from './components/UserContext';
 
 class App extends Component {
 
   state = {
     username: '',
     avatar_url: '',
-    name: '',
+    name: ''
   }
 
   changeUser = (username) => {
     if(username === '') {
-      this.setState({username: username, avatar_url: '', name: ''})
+      this.setState({username: '', avatar_url: '', name: ''})
     } else {
       api.getUser(username)
         .then(user => {
@@ -44,25 +45,26 @@ class App extends Component {
     return (
       <main className='app'>
         <Header />
-        <Nav username={this.state.username} avatar={this.state.avatar_url} changeUser={this.changeUser} />
-        <LoggedIn {...this.state}/>
-        <Router primary={false} className='viewport'>
-          <Home path='/' />
-          <Articles path='/articles/*' />
-          <SingleArticle path='/articles/:article_id' {...this.state} />
-          <Login path='/login' changeUser={this.changeUser} />
-          <User path='/user/*' myUsername={username} myAvatar={avatar_url} myName={name}/>
-          <CreateArticles path='/article/create' username={username}/>
-          <EndpointError default />
-        </Router>
+        <UserContext.Provider value={this.state}>
+          <Nav changeUser={this.changeUser} />
+          <LoggedIn />
+          <Router primary={false} className='viewport'>
+            <Home path='/' />
+            <Articles path='/articles/*' />
+            <SingleArticle path='/articles/:article_id' />
+            <Login path='/login' changeUser={this.changeUser} />
+            <User path='/user/*' myUsername={username} myAvatar={avatar_url} myName={name}/>
+            <CreateArticles path='/article/create'/>
+            <EndpointError default />
+          </Router>
+        </UserContext.Provider>
       </main>
     );
   }
 
   componentDidMount() {
-    if(localStorage.getItem('username')) {
+      console.log(localStorage);
       this.setState({username: localStorage.getItem('username'), avatar_url: localStorage.getItem('avatar_url'),  name: localStorage.getItem('name')});
-    }
   }
 }
 

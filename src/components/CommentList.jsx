@@ -7,6 +7,7 @@ import CommentFilter from './CommentFilter';
 import Loader from './Loader';
 import ErrorHandler from './ErrorHandler';
 import throttle from 'lodash.throttle';
+import UserContext from './UserContext';
 
 class CommentList extends Component {
 
@@ -102,40 +103,46 @@ class CommentList extends Component {
 
   render() {
     const {comments, isLoading, displayFilter, error, pageLoading} = this.state;
-    const {username, article_id, comment_count} = this.props;
-    console.log(username);
+    const {article_id, comment_count} = this.props;
     if(isLoading) return <Loader loading={isLoading}/>
     if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg}/>
     return (
-      <section className={styles.comments}>
-        <div className={styles.heading}>
-          <h3 className={styles.heading}>Comments | {comment_count}</h3>
-          <button onClick={this.toggleDisplayFilter}>Filter</button>
-        </div>
+      <UserContext.Consumer>
         {
-          displayFilter && <CommentFilter
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            sortBy={this.state.filters.sortBy}
-            orderBy={this.state.filters.orderBy}
-          />
+          ({username}) => (
+            <section className={styles.comments}>
+              <div className={styles.heading}>
+                <h3 className={styles.heading}>Comments | {comment_count}</h3>
+                <button onClick={this.toggleDisplayFilter}>Filter</button>
+              </div>
+              {
+                displayFilter &&
+                  <CommentFilter
+                    handleSubmit={this.handleSubmit}
+                    handleChange={this.handleChange}
+                    sortBy={this.state.filters.sortBy}
+                    orderBy={this.state.filters.orderBy}
+                  />
+              }
+              <CreateComment username={username} id={article_id} updateComments={this.updateComments}/>
+              <ul className={styles.comments}>
+                {
+                  comments && comments.map(comment => {
+                    return (
+                      <CommentCard comment={comment} key={comment.comment_id} username={username}/>
+                    )
+                  })
+                }
+                {
+                  pageLoading && <li>
+                    <Loader loading={pageLoading} />
+                  </li>
+                }
+              </ul>
+            </section>
+          )
         }
-        <CreateComment username={username} id={article_id} updateComments={this.updateComments}/>
-        <ul className={styles.comments}>
-          {
-            comments && comments.map(comment => {
-              return (
-                <CommentCard comment={comment} key={comment.comment_id} username={username}/>
-              )
-            })
-          }
-          {
-            pageLoading && <li>
-              <Loader loading={pageLoading} />
-            </li>
-          }
-        </ul>
-      </section>
+      </UserContext.Consumer>
     );
   }
 

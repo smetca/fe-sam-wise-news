@@ -4,6 +4,7 @@ import {Link} from '@reach/router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBars} from '@fortawesome/free-solid-svg-icons';
 import onClickOutside from 'react-onclickoutside';
+import UserContext from './UserContext';
 
 class Nav extends Component {
 
@@ -36,30 +37,35 @@ class Nav extends Component {
 
   render() {
     const {isNav} = this.state;
-    const {username} = this.props;
     return (
-      <nav className={styles.nav}>
-        <button onClick={this.handleNav}><FontAwesomeIcon icon={faBars} color='white'/></button>
-        <ul className={isNav ? `${styles['navlist-active']} ${styles.navlist}` : styles.navlist}>
-          {
-            username === '' && <li>
-              <Link to='/login' onClick={this.handleClick} className={styles.link}>Login</Link>
-            </li>
-          }
-          <li><Link to='/' onClick={this.handleClick} className={styles.link}>Home</Link></li>
-          <li><Link to='/articles' onClick={this.handleClick} className={styles.link}>Articles</Link></li>
-          {
-            username && <>
-              <li>
-                <Link to={`/user/${username}`} onClick={this.handleClick} className={styles.link}>{this.props.username} <img src={this.props.avatar} alt="A user avatar"/></Link>
-              </li>
-              <li>
-                <Link to='/' onClick={this.handleLogout} className={styles.link}>Logout</Link>
-              </li>
-            </>
-          }
-        </ul>
-      </nav>
+      <UserContext.Consumer>
+        {
+          ({username, avatar_url}) => (
+            <nav className={styles.nav}>
+              <button onClick={this.handleNav}><FontAwesomeIcon icon={faBars} color='white'/></button>
+              <ul className={isNav ? `${styles['navlist-active']} ${styles.navlist}` : styles.navlist}>
+                {
+                  username === '' && <li>
+                    <Link to='/login' onClick={this.handleClick} className={styles.link}>Login</Link>
+                  </li>
+                }
+                <li><Link to='/' onClick={this.handleClick} className={styles.link}>Home</Link></li>
+                <li><Link to='/articles' onClick={this.handleClick} className={styles.link}>Articles</Link></li>
+                {
+                  username && <>
+                    <li>
+                      <Link to={`/user/${username}`} onClick={this.handleClick} className={styles.link}>{username} <img src={avatar_url} alt="A user avatar"/></Link>
+                    </li>
+                    <li>
+                      <Link to='/' onClick={this.handleLogout} className={styles.link}>Logout</Link>
+                    </li>
+                  </>
+                }
+              </ul>
+            </nav>
+          )
+        }
+      </UserContext.Consumer>
     );
   }
 }

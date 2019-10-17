@@ -40,15 +40,15 @@ class CreateArticle extends Component {
 
   render() {
     const {title, topic, body, error, isLoading} = this.state;
-    if(!this.state.author.length) return <p>No user logged in</p>
+    // if(!this.state.author.length) return <p>No user logged in</p>
     if(error) return <ErrorHandler status={error.response.status} msg={error.response.data.msg}/>
     if(isLoading) return <Loader loading={isLoading} />
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className={styles.form}>
         <label htmlFor="title">Title</label>
         <input onChange={this.handleChange} value={title} type="text" name="title" placeholder="Article Title..." required/>
         <label htmlFor="topic">Topic</label>
-        <select onChange={this.handleChange} name="topic" value={topic}>
+        <select onChange={this.handleChange} name="topic" value={topic} className={styles.dropdown}>
           <option value="coding">Coding</option>
           <option value="cooking">Cooking</option>
           <option value="football">Football</option>
@@ -62,8 +62,16 @@ class CreateArticle extends Component {
 
   componentDidMount() {
     const {username} = this.props;
-    if(username.length) {
-      this.setState({author: username, isLoading: false})
+    this.setState({author: username, isLoading: false}, () => {
+      console.log(this.state.author)
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    const {username} = this.props;
+    const {username: prevUsername} = prevProps;
+    if(prevUsername !== username) {
+      this.setState({author: username})
     }
   }
 }

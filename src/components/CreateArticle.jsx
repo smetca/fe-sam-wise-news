@@ -62,9 +62,7 @@ class CreateArticle extends Component {
 
   componentDidMount() {
     const {username} = this.props;
-    this.setState({author: username, isLoading: false}, () => {
-      console.log(this.state.author)
-    })
+    this.setState({author: username, isLoading: false});
   }
 
   componentDidUpdate(prevProps) {

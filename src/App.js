@@ -63,8 +63,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-      console.log(localStorage);
-      this.setState({username: localStorage.getItem('username'), avatar_url: localStorage.getItem('avatar_url'),  name: localStorage.getItem('name')});
+      this.setState({
+        username: localStorage.getItem('username'),
+        avatar_url: localStorage.getItem('avatar_url'),
+        name: localStorage.getItem('name')});
   }
 }
 

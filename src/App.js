@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   changeUser = (username) => {
-    if(username) {
+    if(username === '') {
       this.setState({username: '', avatar_url: '', name: ''})
     } else {
       api.getUser(username)

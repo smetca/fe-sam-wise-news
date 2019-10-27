@@ -15,6 +15,39 @@
 }
 
 .login form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(2, 2.5rem);
+}
+
+.login > form label {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: black solid 1px;
+  border-bottom: black solid 1px;
+}
+
+.login > form input {
+  grid-column: span 2;
+}
+
+.login > form select {
+  border: black solid 1px;
+  background-color: rgb(23, 75, 107);
+  color: white;
+  /* border-top: black solid 1px;
+  border-bottom: black solid 1px; */
+  border-radius: 1px;
+}
+
+.login > form select:active {
+  background-color: rgb(255, 255, 255)
+}
+
+.login > form input {
+  border: 0;
+  background-color: #133C55;
+  color: white;
 }

@@ -18,9 +18,11 @@
 
 .form select {
   border: black solid 1px;
+  background-color: rgb(23, 75, 107);
+  color: white;
   /* border-top: black solid 1px;
   border-bottom: black solid 1px; */
-  border-radius: 5px;
+  border-radius: 1px;
 }
 
 .form select:active {

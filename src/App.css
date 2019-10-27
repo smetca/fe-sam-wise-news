@@ -10,7 +10,10 @@ button {
 }
 
 .viewport {
+  align-self: center;
+  justify-self: center;
   display: grid;
   grid-column: span 2;
   grid-row: 3;
+  width: 100%;
 }

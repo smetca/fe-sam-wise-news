@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   changeUser = (username) => {
-    if(username === '') {
+    if(username) {
       this.setState({username: '', avatar_url: '', name: ''})
     } else {
       api.getUser(username)
@@ -63,10 +63,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    if(localStorage.getItem('username')) {
       this.setState({
         username: localStorage.getItem('username'),
         avatar_url: localStorage.getItem('avatar_url'),
         name: localStorage.getItem('name')});
+    }
   }
 }
 

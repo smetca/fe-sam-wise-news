@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   border-bottom: black solid 2px;
-  background-color: whitesmoke;
+  background-color: white;
 }
 
 .articles-link {
@@ -29,7 +29,7 @@
   width: 100%;
   padding: 1rem 0;
   margin: 0;
-  background-color: whitesmoke;
+  background-color: white;
   border-bottom: black solid 2px;
   text-align: center;
 }
@@ -37,8 +37,6 @@
 .title {
   text-align: center;
   margin: 0;
-  margin-left: 0.3rem;
-  margin-right: 0.3rem;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
   border-bottom: black solid 1px;
@@ -47,8 +45,6 @@
 .body {
   text-align: center;
   border-bottom: black solid 1px;
-  margin-left: 0.3em;
-  margin-right: 0.3em;
   color: rgb(53, 53, 53)
 }
 

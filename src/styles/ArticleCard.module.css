@@ -1,9 +1,10 @@
 .article {
   display: grid;
-  grid-template-rows: 1fr 3em 2em 2em;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 3em minmax(2em, max-content);
+  grid-template-columns: 1fr 1fr 1fr;
   border-bottom: black solid 2px;
   border-radius: 5px;
+  background-color: white;
 }
 
 .article:last-child {
@@ -17,6 +18,9 @@
   grid-row: 1;
   grid-column: span 4;
   color: black;
+  margin-top: 5px;
+  border-top: black solid 2px;
+  border-radius: 5px;
 }
 
 .title h3 {
@@ -28,7 +32,11 @@
   justify-content: center;
   align-items: center;
   grid-row: 3;
-  grid-column: span 2;
+  grid-column: span 1;
+}
+
+.created em {
+  text-align: center;
 }
 
 .created time {
@@ -40,12 +48,40 @@
   justify-content: center;
   align-items: center;
   grid-row: 3;
-  grid-column: span 2;
+  grid-column: span 1;
 }
 
 .topic {
-  grid-column: span 4;
-  grid-row: 4;
+  grid-column: span 1;
+  grid-row: 3;
   justify-self: center;
   align-self: center;
+}
+
+@media only screen and (min-width: 380px) {
+
+  .article {
+    grid-template-columns: 4rem 1fr 1fr 1fr;
+    grid-template-rows: 1fr 3em;
+  }
+
+  .title {
+    grid-column: 2 / span 3;
+    border-bottom: grey solid 1px;
+  }
+
+  .created {
+    grid-row: 2;
+    grid-column: 2 / span 1;
+  }
+
+  .comments {
+    grid-row: 2;
+    grid-column: 3 / span 1;
+  }
+
+  .topic {
+    grid-row: 2;
+    grid-column: 4 / span 1;
+  }
 }

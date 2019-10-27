@@ -8,7 +8,7 @@ const LoggedIn = () => {
       {
         ({username, avatar_url}) => (
           <section className={styles.login}>
-            <em>Logged in as: {username && username.length ? username : 'ananymous'}</em>
+            <em>Logged in as: {username && username.length ? username : 'anonymous'}</em>
             {
               avatar_url && <img src={avatar_url} alt="Your profile"/> 
             }

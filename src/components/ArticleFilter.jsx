@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../styles/ArticleFilter.module.css'
+import { useSpring, animated } from 'react-spring';
 
 const ArticleFilter = ({
   handleSubmit,
@@ -10,8 +11,9 @@ const ArticleFilter = ({
   author,
   users
 }) => {
+  const fade = useSpring({opacity: 1, from: {opacity: 0}});
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <animated.form style={fade} className={styles.form} onSubmit={handleSubmit}>
       <label htmlFor="sortBy">Sort By</label>
       <select onChange={handleChange} name="sortBy" value={sortBy} aria-label='Sort By'>
         <option value="votes">Votes</option>
@@ -41,7 +43,7 @@ const ArticleFilter = ({
         }
       </select>
       <input type="submit" value='Search'/>
-    </form>
+    </animated.form>
   );
 }
  

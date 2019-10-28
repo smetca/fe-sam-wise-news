@@ -36,7 +36,7 @@ class CommentCard extends Component {
     if(deleted) return <li>Comment deleted</li>
     return (
         <li className={styles.comment}>
-          <p>{comment.body}</p>
+          <p className={styles.body}>{comment.body}</p>
           <div className={styles['author-wrapper']}>
             <div className={styles.author}>
               <span><img src={avatar} alt="Users Avatar"/> {comment.author}</span>

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import styles from '../styles/Nav.module.css'
-import {Link} from '@reach/router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBars} from '@fortawesome/free-solid-svg-icons';
 import onClickOutside from 'react-onclickoutside';
 import UserContext from './UserContext';
+import NavList from './NavList';
 
 class Nav extends Component {
 
@@ -43,25 +43,7 @@ class Nav extends Component {
           ({username, avatar_url}) => (
             <nav className={styles.nav}>
               <button onClick={this.handleNav} aria-label='Nav'><FontAwesomeIcon icon={faBars} color='white'/></button>
-              <ul className={isNav ? `${styles['navlist-active']} ${styles.navlist}` : styles.navlist}>
-                {
-                  username === '' && <li>
-                    <Link to='/login' onClick={this.handleClick} className={styles.link}>Login</Link>
-                  </li>
-                }
-                <li><Link to='/' onClick={this.handleClick} className={styles.link}>Home</Link></li>
-                <li><Link to='/articles' onClick={this.handleClick} className={styles.link}>Articles</Link></li>
-                {
-                  username && <>
-                    <li>
-                      <Link to={`/user/${username}`} onClick={this.handleClick} className={styles.link}>{username} <img src={avatar_url} alt="A user avatar"/></Link>
-                    </li>
-                    <li>
-                      <Link to='/' onClick={this.handleLogout} className={styles.link}>Logout</Link>
-                    </li>
-                  </>
-                }
-              </ul>
+              <NavList username={username} avatar_url={avatar_url} isNav={isNav} handleClick={this.handleClick} handleLogout={this.handleLogout}/>
             </nav>
           )
         }

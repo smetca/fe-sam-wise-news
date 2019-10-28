@@ -45,17 +45,17 @@ class CreateArticle extends Component {
     if(isLoading) return <Loader loading={isLoading} />
     return (
       <form onSubmit={this.handleSubmit} className={styles.form}>
-        <label htmlFor="title">Title</label>
-        <input onChange={this.handleChange} value={title} type="text" name="title" placeholder="Article Title..." aria-label='Title' required/>
-        <label htmlFor="topic">Topic</label>
+        <label htmlFor="title" className={styles.title}>Title</label>
+        <input onChange={this.handleChange} className={styles['title-input']} value={title} type="text" name="title" placeholder="Article Title..." aria-label='Title' required/>
+        <label htmlFor="topic" className={styles.topic}>Topic</label>
         <select onChange={this.handleChange} name="topic" value={topic} className={styles.dropdown} aria-label='Topic'>
           <option value="coding">Coding</option>
           <option value="cooking">Cooking</option>
           <option value="football">Football</option>
         </select>
-        <label htmlFor="body">Article Body</label>
+        <label htmlFor="body" className={styles['body-title']}>Article Body</label>
         <TextareaAutosize onChange={this.handleChange} name="body" value={body} maxLength={3000} className={styles.textbox} rows={3} placeholder="Article Body Here..." aria-label='Article Body' required/>
-        <input type="submit" value="Post Article"/>
+        <input type="submit" className={styles.submit} value="Post Article"/>
       </form>
     );
   }

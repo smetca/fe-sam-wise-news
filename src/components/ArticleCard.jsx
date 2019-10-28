@@ -8,11 +8,13 @@ import {faCalendarAlt, faCommentAlt, faBookOpen} from '@fortawesome/free-solid-s
 import { useSpring, animated } from 'react-spring';
 
 const ArticleCard = ({article}) => {
-  const props = useSpring({opacity: 1, from: {opacity: 0}});
+  const fade = useSpring({opacity: 1, from: {opacity: 0}});
   return (
-    <animated.li style={props} className={styles.article}>
+    <animated.li style={fade} className={styles.article}>
       <Link className={styles.title} to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
-      <Voter id={article.article_id} votes={article.votes}/>
+      <div className={styles.voter}>
+        <Voter id={article.article_id} votes={article.votes}/>
+      </div>
       <span className={styles.created}><FontAwesomeIcon icon={faCalendarAlt}/><em><Moment date={article.created_at} fromNow/></em></span>
       <div className={styles.comments}>
         <span><FontAwesomeIcon icon={faCommentAlt}/> {article.comment_count}</span>

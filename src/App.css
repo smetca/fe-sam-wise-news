@@ -5,15 +5,43 @@ button {
 .app {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 5fr 1fr;
+  grid-template-columns: 5fr 72px;
   grid-template-rows: 4.5rem 1.4rem 1fr;
+  min-width: 320px;
+  min-height: 100vh;
+  transition-duration: 3s;
+}
+
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: whitesmoke;
+  z-index: -1;
 }
 
 .viewport {
-  align-self: center;
+  align-self: flex-start;
   justify-self: center;
   display: grid;
   grid-column: span 2;
   grid-row: 3;
   width: 100%;
+  max-width: 1100px;
+}
+
+@media only screen and (min-width: 768px) {
+  .app {
+    grid-template-columns: minmax(600px, 1fr) 2fr;
+    grid-template-rows: 4.5rem 3rem 1fr;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .viewport {
+    border-right: black solid 2px;
+    border-left: black solid 2px;
+  }
 }

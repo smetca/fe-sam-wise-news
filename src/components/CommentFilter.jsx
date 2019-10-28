@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from '../styles/CommentFilter.module.css';
 
 const CommentFilter = ({handleSubmit, handleChange, sortBy, orderBy}) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label htmlFor="sortBy">Sort By</label>
       <select onChange={handleChange} name="sortBy" value={sortBy} aria-label='Sort By'>
         <option value="votes">Votes</option>

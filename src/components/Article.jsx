@@ -38,20 +38,26 @@ class Article extends Component {
       <article className={styles.article}>
         <h2>{article.title}</h2>
         <p>{article.body}</p>
-        <div className={styles.info}>
-        <em className={styles.author}><img src={authorAvatar} alt="Author's avatar"/> {authorName}</em>
-          <div className={styles.created}>
-            <FontAwesomeIcon icon={faCalendarAlt}/>
-            <em><Moment date={article.created_at} fromNow/></em>
-          </div>
-          <div className={styles.topic}>
-            <Link to={`/articles/topic/${article.topic}`}>
-              <FontAwesomeIcon icon={faBookOpen} />
-              {article.topic}
-            </Link>
+        <div className={styles['info-wrapper']}>
+          <div className={styles.info}>
+            <em className={styles.author}><img src={authorAvatar} alt="Author's avatar"/> {authorName}</em>
+            <div className={styles.created}>
+              <FontAwesomeIcon icon={faCalendarAlt}/>
+              <em><Moment date={article.created_at} fromNow/></em>
+            </div>
+            <div className={styles.topic}>
+              <Link to={`/articles/topic/${article.topic}`}>
+                <FontAwesomeIcon icon={faBookOpen} />
+                {article.topic}
+              </Link>
+            </div>
           </div>
         </div>
-        <Voter id={article.article_id} votes={article.votes} />
+        <div className={styles['voter-wrapper']}>
+          <div className={styles.voter}>
+            <Voter id={article.article_id} votes={article.votes} />
+          </div>
+        </div>
       </article>
     );
   }

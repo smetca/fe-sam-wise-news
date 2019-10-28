@@ -3,6 +3,7 @@
   flex-direction: column;
   text-align: center;
   border-bottom: 1px solid black;
+  background-color: white;
 }
 
 .article p {
@@ -15,14 +16,21 @@
   border-bottom: 2px solid black;
 }
 
+.info-wrapper {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+}
+
 .info {
   display: flex;
   align-self: center;
   align-items: center;
   padding: 0.8em 0;
-  border-top: 1px solid black;
   width: 100%;
   justify-content: space-around;
+  max-width: 425px;
 }
 
 .created svg {
@@ -52,4 +60,15 @@
   max-width: 2em;
   border-radius: 50%;
   border: black solid 1px;
+}
+
+.voter {
+  max-width: 600px;
+}
+
+@media only screen and (min-width: 600px) {
+  .voter-wrapper {
+    width: 600px;
+    align-self: center;
+  }
 }

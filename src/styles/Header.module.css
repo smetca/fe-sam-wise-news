@@ -6,6 +6,7 @@
 .header {
   grid-column: 1;
   grid-row: 1;
+  position: sticky;
   display: flex;
   justify-content: center;
   background-color: #02507C;
@@ -34,4 +35,11 @@
 
 .header:hover a {
   color: white;
+}
+
+@media only screen and (min-width: 768px) {
+  .header {
+    grid-column: span 2;
+    border-bottom: 0;
+  }
 }

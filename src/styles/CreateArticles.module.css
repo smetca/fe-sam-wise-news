@@ -1,0 +1,16 @@
+.create {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: white;
+  border-bottom: black solid 2px;
+}
+
+.create h2 {
+  text-align: center;
+  background-color: white;
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: black solid 2px;
+  width: 100%;
+}

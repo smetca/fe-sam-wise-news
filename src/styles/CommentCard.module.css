@@ -1,8 +1,11 @@
 .comment {
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+  border-top: black solid 2px;
   border-bottom: black solid 2px;
+  background-color: white;
 }
 
 .comment img {
@@ -12,6 +15,7 @@
 
 .voter {
   border-bottom: 0;
+  flex-direction: row;
 }
 
 .author-wrapper {
@@ -30,4 +34,33 @@
   border: 0;
   color: white;
   border-radius: 3px;
+}
+
+@media only screen and (min-width: 380px) {
+  .comment {
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    grid-template-columns: 3rem 1fr;
+  }
+
+  .voter {
+    grid-row: span 2;
+    grid-column: 1;
+    flex-direction: column;
+    border-right: black solid 1px;
+  }
+
+  .body {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .author-wrapper {
+    grid-row: 2;
+    grid-column: 2;
+    display: flex;
+    align-items: stretch;
+  }
 }

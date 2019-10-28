@@ -1,28 +1,10 @@
-.login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-}
-
-.login h2 {
-  width: 100%;
-  padding: 1rem 0;
-  margin: 0;
-  border-bottom: black solid 2px;
-  text-align: center;
-  background-color: white;
-}
-
-.login form {
-  width: 100%;
+.form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(2, 2.5rem);
+  grid-template-rows: repeat(3, 2.5rem);
 }
 
-.login > form label {
+.form > label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,11 +13,11 @@
   background-color: rgba(255, 255, 255, 0.623)
 }
 
-.login > form input {
+.form > input {
   grid-column: span 2;
 }
 
-.login > form select {
+.form select {
   border: black solid 1px;
   background-color: rgb(23, 75, 107);
   color: white;
@@ -44,11 +26,11 @@
   border-radius: 1px;
 }
 
-.login > form select:active {
+.form select:active {
   background-color: rgb(255, 255, 255)
 }
 
-.login > form input {
+.form input {
   border: 0;
   background-color: #133C55;
   color: white;
